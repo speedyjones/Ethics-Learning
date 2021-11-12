@@ -1,0 +1,35 @@
+@Library(['mm-dsl'])_
+mm_java_build
+{
+    AGENT                   = "non-prod-0001"
+}
+mm_docker_build
+{
+    REGISTRY_NAME           = "mahindraregistry"
+    IMAGE_NAME              = "ethicsgov-backend"
+    AGENT                   = "non-prod-0001"
+}
+mm_k8s_deployment_pipeline
+{
+    ENVIRONMENT             = "dev"
+    NAMESPACE               = "dev-ethicsgov-backend"
+    CLUSTER_NAME            = 'non-prod-0001-cluster'
+    APP_RESOURCE_GROUP_NAME = 'non-prod-0001'
+    DEPLOYMENT_NAME         = "ethicsgov-backend"
+    DEPLOYMENT_TYPE         = "automatic"
+    RESTRICT_TO_BRANCH      = "dev"
+    RESTRICT_TO_TAGS        = false
+    CANARY                  = false
+}
+mm_k8s_deployment_pipeline
+{
+    ENVIRONMENT             = "uat"
+    NAMESPACE               = "uat-ethicsgov-backend"
+    CLUSTER_NAME            = 'non-prod-0001-cluster'
+    APP_RESOURCE_GROUP_NAME = 'non-prod-0001'
+    DEPLOYMENT_NAME         = "ethicsgov-backend"
+    DEPLOYMENT_TYPE         = "automatic"
+    RESTRICT_TO_BRANCH      = "uat"
+    RESTRICT_TO_TAGS        = false
+    CANARY                  = false
+}

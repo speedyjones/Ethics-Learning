@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/eg-backend/Ethics-Learning/Ethics-Learning.iml" filepath="$PROJECT_DIR$/eg-backend/Ethics-Learning/Ethics-Learning.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mahindragto-eg-backend-b0f477435f35.iml" filepath="$PROJECT_DIR$/.idea/mahindragto-eg-backend-b0f477435f35.iml" />
+    </modules>
+  </component>
+</project>

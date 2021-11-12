@@ -1,0 +1,93 @@
+# Default values for new-model.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: mahindraregistry.azurecr.io/ethicsgov-backend
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8080
+
+resources:
+  limits:
+    cpu: 1500m
+    memory: 2000Mi
+  requests:
+    cpu: 1500m
+    memory: 2000Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations:
+  - key: "kubernetes.azure.com/scalesetpriority"
+    operator: "Equal"
+    value: "spot"
+    effect: "NoSchedule"
+
+affinity: {}
+
+podEnv:
+  - name: envTarget
+    value: "cloud"
+  - name: JDBC_URL
+    value: "jdbc:mysql://mmuat-0001-mysql-server-qcpsmixh.mysql.database.azure.com:3306/annual_survey?useSSL=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+  - name: JDBC_DRIVERCLASSNAME
+    value: "com.mysql.jdbc.Driver"
+  - name: JDBC_USERNAME
+    value: "mysql-user@mmuat-0001-mysql-server-qcpsmixh"
+  - name: JDBC_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: mmuat-0001-mysql-server-qcpsmixh
+        key: password
+
+virtualservice:
+  host: "ethicsgov-dev.m-devsecops.com"
+  gateway: "default/uat-gateway"
+  port: 8080
+  prefix: /api
+
+sync:
+  secrets:
+    keyvault_name: "app-kv-npAafk4YWA"
+    secrets: ["mmuat-0001-mysql-server-qcpsmixh"]
