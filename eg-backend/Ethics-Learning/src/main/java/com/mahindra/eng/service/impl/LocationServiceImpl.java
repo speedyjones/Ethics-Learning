@@ -17,8 +17,8 @@ public class LocationServiceImpl implements LocationService {
         this.locationRepository = locationRepository;
     }
 
-    public List<Location> getLocationList(Long id) {
-        return locationRepository.findByCompanyId(id);
+    public List<Location> getLocationList(Integer companyId) {
+        return locationRepository.findByCompanyId(companyId);
     }
 
     public Location saveLocation(LocationDTO locationDTO) {

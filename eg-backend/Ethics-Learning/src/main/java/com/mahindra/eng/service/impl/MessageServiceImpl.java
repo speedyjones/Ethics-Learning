@@ -20,6 +20,13 @@ public class MessageServiceImpl implements MessageService {
         return messageRepository.findById(id).get();
     }
 
+
+    @Override
+    public void remove(Long id)
+    {
+        messageRepository.deleteById(id);
+    }
+
     public Message saveMessage(MessageDTO messageDTO) {
         Message message=Message.builder()
                 .id(messageDTO.getId())

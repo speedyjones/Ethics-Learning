@@ -9,9 +9,9 @@ import java.util.Date;
 @Data
 public class EthicsCounselorDTO {
     private Long id;
-    private int locationId;
+    private Long locationId;
     private int employeeId;
-    private int companyId;
+    private Long companyId;
     private String type;
     private String createdBy;
     private Date createdDate;

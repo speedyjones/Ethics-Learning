@@ -5,6 +5,7 @@ import com.mahindra.eng.infrastructure.repository.EthicsPolicyRepository;
 import com.mahindra.eng.model.EthicsPolicyDTO;
 import com.mahindra.eng.service.EthicsPolicyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ScopeMetadata;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,9 @@ public class EthicsPolicyServiceImpl implements EthicsPolicyService {
         this.ethicsPolicyRepository = ethicsPolicyRepository;
     }
 
-    public List<EthicsPolicy> getEthicsPolicyList(Long id) {
-        return ethicsPolicyRepository.findByCompanyId(id);
+    @Override
+    public EthicsPolicy getEthicsPolicyList(int CompanyId) {
+        return ethicsPolicyRepository.findByCompanyId(CompanyId);
     }
 
     @Override

@@ -22,6 +22,7 @@ public class MaterialServiceImpl implements MaterialService {
         Material material= Material.builder()
                 .id(materialDTO.getId())
                 .title(materialDTO.getTitle())
+                .companyId(materialDTO.getCompanyId())
                 .materialPath(materialDTO.getMaterialPath())
                 .description(materialDTO.getDescription())
                 .externalUrl(materialDTO.getExternalUrl())
@@ -47,6 +48,7 @@ public class MaterialServiceImpl implements MaterialService {
         if (materialRepository.existsById(id)) {
             Material material=materialRepository.findById(id).get();
             material.setTitle(materialDTO.getTitle());
+            material.setCompanyId(materialDTO.getCompanyId());
             material.setMaterialPath(materialDTO.getMaterialPath());
             material.setDescription(materialDTO.getDescription());
             material.setMediaType(materialDTO.getMediaType());

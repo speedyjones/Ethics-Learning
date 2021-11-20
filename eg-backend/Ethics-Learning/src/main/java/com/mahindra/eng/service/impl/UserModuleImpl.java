@@ -18,11 +18,6 @@ public class UserModuleImpl implements UserModuleService {
     private UserModuleRepository userModuleRepository;
 
 
-    @Override
-    public List<UserModule> getUserProfile(Long userId) {
-
-        return userModuleRepository.findByUserId(userId);
-    }
 
     @Override
     public UserModule getModuleList(Long id) {

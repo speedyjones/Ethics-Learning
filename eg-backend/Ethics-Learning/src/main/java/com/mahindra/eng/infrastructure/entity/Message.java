@@ -3,6 +3,9 @@ package com.mahindra.eng.infrastructure.entity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLUpdate;
+import org.hibernate.annotations.Where;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -12,6 +15,8 @@ import java.util.Date;
 
 @Builder
 @Entity
+@SQLDelete(sql = "UPDATE eng_message SET status = true WHERE id=? ")
+@Where(clause = "status=false")
 @AllArgsConstructor
 @Data
 @Table(name="eng_message")

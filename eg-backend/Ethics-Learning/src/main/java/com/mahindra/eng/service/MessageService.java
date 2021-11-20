@@ -7,5 +7,6 @@ public interface MessageService {
     public Message getMessageList(Long id);
     public Message saveMessage(MessageDTO messageDTO);
     public Message saveOrUpdate(Long id, MessageDTO messageDTO);
+    public void remove(Long id);
 
 }

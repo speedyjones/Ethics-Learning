@@ -7,6 +7,8 @@ import com.mahindra.eng.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
@@ -24,11 +26,13 @@ public class AdminController {
     private ModuleServiceImpl moduleServiceImpl;
     private UserServiceImpl userServiceImpl;
     private UserModuleService userModuleServiceImpl;
+    private RecentUpdatesServiceImpl recentUpdatesServiceImpl;
+    private EthicsHelpLineImpl ethicsHelpLineImpl;
 
     @Autowired(required = true)
     public void AnnualCalendarController(AnnualCalendarServiceImpl annualCalendarServiceImpl, CodeOfViolationServiceImpl codeOfViolationServiceImpl, CompanyServiceImpl companyServiceImpl, ContantServiceImpl contantServiceImpl, CountryServiceImpl countryServiceImpl
             , EthicsCounselorImpl ethicsCounselorImpl, EthicsPolicyServiceImpl ethicsPolicyServiceImpl, LocationServiceImpl locationServiceImpl, MaterialServiceImpl materialServiceImpl, MessageServiceImpl messageServiceImpl
-            , ModuleServiceImpl moduleServiceImpl, UserServiceImpl userServiceImpl, UserModuleService userModuleServiceImpl) {
+            , ModuleServiceImpl moduleServiceImpl, UserServiceImpl userServiceImpl, UserModuleService userModuleServiceImpl, RecentUpdatesServiceImpl recentUpdatesServiceImpl, EthicsHelpLineImpl ethicsHelpLineImpl) {
         this.annualCalendarServiceImpl = annualCalendarServiceImpl;
         this.codeOfViolationServiceImpl = codeOfViolationServiceImpl;
         this.companyServiceImpl = companyServiceImpl;
@@ -42,6 +46,9 @@ public class AdminController {
         this.moduleServiceImpl = moduleServiceImpl;
         this.userServiceImpl = userServiceImpl;
         this.userModuleServiceImpl = userModuleServiceImpl;
+        this.recentUpdatesServiceImpl = recentUpdatesServiceImpl;
+        this.ethicsCounselorImpl = ethicsCounselorImpl;
+        this.ethicsHelpLineImpl = ethicsHelpLineImpl;
     }
 
     @PostMapping("/calendar/insert")
@@ -134,6 +141,28 @@ public class AdminController {
         return ethicsCounselorImpl.saveOrUpdate(id, ethicsCounselorDTO);
     }
 
+    @GetMapping("/ethicsHelpline/get")
+    public List<EthicsHelpline> getHelpLineList() {
+        return ethicsHelpLineImpl.getHelpLineList();
+    }
+
+
+    @GetMapping("/ethicsHelpline/get/{id}")
+    public EthicsHelpline getById(@PathVariable Long id) {
+        return ethicsHelpLineImpl.getHelplineById(id);
+    }
+
+    @PostMapping("/ethicsHelpline/insert")
+    public EthicsHelpline insertHelpline(@RequestBody EthicsHelplineDTO ethicsHelplineDTO) {
+
+        return ethicsHelpLineImpl.saveHelpline(ethicsHelplineDTO);
+    }
+
+    @PutMapping("/ethicsHelpline/update/{id}")
+    private EthicsHelpline update(@PathVariable("id") Long id, @RequestBody EthicsHelplineDTO ethicsHelplineDTO) {
+        return ethicsHelpLineImpl.saveOrUpdate(id,ethicsHelplineDTO);
+    }
+
     @PostMapping("/ethics-policy/insert")
     public EthicsPolicy insertEthicsPolicy(@RequestBody EthicsPolicyDTO ethicsPolicyDTO) {
 
@@ -181,6 +210,13 @@ public class AdminController {
         return messageServiceImpl.saveMessage(messageDTO);
     }
 
+
+    @DeleteMapping("/messages/delete/{id}")
+    public void remove(@PathVariable Long id)
+    {
+        messageServiceImpl.remove(id);
+    }
+
     @PutMapping("/messages/update/{id}")
     private Message update(@PathVariable("id") Long id, @RequestBody MessageDTO messageDTO) {
         return messageServiceImpl.saveOrUpdate(id, messageDTO);
@@ -200,6 +236,28 @@ public class AdminController {
     private ELModule update(@PathVariable("id") Long id, @RequestBody ModuleDTO moduleDTO) {
         return moduleServiceImpl.saveOrUpdate(id, moduleDTO);
     }
+
+    @GetMapping("/recentUpdates/get/")
+    public List<RecentUpdates> getAllUpdates()
+    {
+        return recentUpdatesServiceImpl.getRecentUpdates();
+    }
+
+    @GetMapping("/recentUpdates/get/{id}")
+    public RecentUpdates getUpdatesById(@PathVariable Long id) {
+        return recentUpdatesServiceImpl.getById(id);
+    }
+
+    @PostMapping("/recentUpdates/insert")
+    public RecentUpdates insertUpdates(@RequestBody RecentUpdatesDTO recentUpdatesDTO) {
+        return recentUpdatesServiceImpl.saveUpdates(recentUpdatesDTO);
+    }
+
+    @PutMapping("/recentUpdates/update/{id}")
+    private RecentUpdates update(@PathVariable("id") Long id, @RequestBody RecentUpdatesDTO recentUpdatesDTO) {
+        return recentUpdatesServiceImpl.saveOrUpdate(id, recentUpdatesDTO);
+    }
+
 
     @GetMapping("/userModules/get/{id}")
     public UserModule getUserModuleById(@PathVariable Long id) {
@@ -225,7 +283,7 @@ public class AdminController {
     }
 
     @PutMapping("/user/update/{userid}")
-    private User update(@PathVariable("userid") Long id, @RequestBody UserDTO userDTO) {
+        private User update(@PathVariable("userid") Long id, @RequestBody UserDTO userDTO) {
         return userServiceImpl.saveOrUpdate(id, userDTO);
     }
 }

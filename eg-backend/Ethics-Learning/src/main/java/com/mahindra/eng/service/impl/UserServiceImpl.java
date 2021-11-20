@@ -2,6 +2,7 @@ package com.mahindra.eng.service.impl;
 
 import com.mahindra.eng.infrastructure.entity.Material;
 import com.mahindra.eng.infrastructure.entity.User;
+import com.mahindra.eng.infrastructure.entity.UserModule;
 import com.mahindra.eng.infrastructure.repository.CompanyRepository;
 import com.mahindra.eng.infrastructure.repository.MaterialRepository;
 import com.mahindra.eng.infrastructure.repository.UserRepository;
@@ -20,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
 
     @Autowired
-    public void UserServiceImple(UserRepository adminRepository, MaterialRepository materialRepository,CompanyRepository companyRepository) {
+    public void UserServiceImpl(UserRepository adminRepository, MaterialRepository materialRepository,CompanyRepository companyRepository) {
         this.adminRepository = adminRepository;
         this.materialRepository = materialRepository;
 
@@ -57,7 +58,14 @@ public class UserServiceImpl implements UserService {
         return adminRepository.findById(id).get();
     }
 
-    public User getHelpDetails(Integer companyId) {
+    public User getUserProfile(Long id) {
+
+        return adminRepository.findById(id).get();
+    }
+
+
+
+    public User getHelpDetails(int companyId) {
 
         return adminRepository.findByCompanyId(companyId);
     }
@@ -98,6 +106,8 @@ public class UserServiceImpl implements UserService {
 
     public List<Material> getAllMaterial() {
         return materialRepository.findAll();}
+
+
 
 
 }

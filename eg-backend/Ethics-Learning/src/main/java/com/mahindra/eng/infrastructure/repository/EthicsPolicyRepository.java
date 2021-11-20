@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface EthicsPolicyRepository extends JpaRepository<EthicsPolicy,Long> {
 
-    List<EthicsPolicy> findByCompanyId(Long id);
+    EthicsPolicy findByCompanyId(int companyId);
 }

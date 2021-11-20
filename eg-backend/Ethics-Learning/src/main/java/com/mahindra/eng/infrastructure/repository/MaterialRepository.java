@@ -10,8 +10,8 @@ import java.util.List;
 @Repository
 public interface MaterialRepository extends JpaRepository<Material,Long> {
 
-    @Query(value = "select * from eng_material where title =?1 limit ?2",nativeQuery = true)
-    List<Material> findByModuleType(String  moduleName, int limit);
+    @Query(value = "select * from eng_material where module_type =?1 limit ?2",nativeQuery = true)
+    List<Material> findByModuleType(String  module_type, int limit);
 
 
     List<Material> findByModuleType(Long id);

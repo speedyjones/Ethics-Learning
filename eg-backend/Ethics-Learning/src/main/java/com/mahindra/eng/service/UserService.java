@@ -12,4 +12,5 @@ public interface UserService {
     public User getMaterialList(Long id);
     public User saveOrUpdate(Long id,UserDTO userDTO);
     public List<Material> getAllMaterial();
+    public User getUserProfile(Long id);
 }

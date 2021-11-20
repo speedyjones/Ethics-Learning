@@ -8,7 +8,7 @@ import java.util.List;
 @Service
 public interface LocationService {
 
-    public List<Location> getLocationList(Long id);
+    public List<Location> getLocationList(Integer companyId);
     public Location saveLocation(LocationDTO locationDTO);
     public Location saveOrUpdate(Long id, LocationDTO locationDTO);
 
